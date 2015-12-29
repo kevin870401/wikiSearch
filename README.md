@@ -25,15 +25,15 @@ no event or log including here since they are too large.
 
 rename it to schema.xml
 replace fields with below
-```
-    <field name="_version_" type="long" indexed="true" stored="true"/>
+
+    ```<field name="_version_" type="long" indexed="true" stored="true"/>
     <field name="id" type="string" indexed="true" stored="true" required="true" />
     <field name="title" type="string" indexed="true" stored="true"/>
     <field name="revision" type="int" indexed="true" stored="false"/>
     <field name="user" type="string" indexed="true" stored="false"/>
     <field name="userId" type="int" indexed="true" stored="false" />
-    <field name="text" type="text_en" indexed="true" stored="false" />
-    ```
+    <field name="text" type="text_en" indexed="true" stored="false" /> ```
+   
 * solrconfig.xml
 
 include dataimporthandler lib
