@@ -1,0 +1,22 @@
+<dataConfig>
+    <dataSource type="FileDataSource" encoding="UTF-8"/>
+    <document>
+        <entity name="page"
+                processor="XPathEntityProcessor"
+                stream="true"
+                forEach="/mediawiki/page/"
+                url="C:\kevin\solr-5.4.0\server\solr\wiki\input\dewiki-20151226-pages-articles.xml"
+                transformer="RegexTransformer,DateFormatTransformer"
+                >
+            <field column="id" xpath="/mediawiki/page/id"/>
+            <field column="title" xpath="/mediawiki/page/id"/>
+            <field column="revision" xpath="/mediawiki/page/id"/>
+            <field column="user" xpath="/mediawiki/page/id"/>
+            <field column="userId" xpath="/mediawiki/page/id"/>
+            <field column="text" xpath="/mediawiki/page/id"/>
+            <field column="timestamp" xpath="/mediawiki/page/revision/timestamp"
+                   dateTimeFormat="yyy-MM-dd'T'hh:mm:ss'X'"/>
+            <field column="$skipDoc" regrex="^#REDIRECT .*" replaceWith="true" sourceColName="text"/>
+        </entity>
+    </document>
+</dataConfig>
