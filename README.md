@@ -33,10 +33,13 @@ replace fields with below
     <field name="text" type="text_en" indexed="true" stored="false" />
     
 #### solrconfig.xml
+
 ##### include dataimporthandler lib
+
 add: <lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthandler-.*\.jar"/> at line 86
 
 ##### replace ManagedIndexSchemaFactory with classicIndex schemaFactory
+
   <schemaFactory class="ClassicIndexSchemaFactory"/>
     <!--
     <schemaFactory class="ManagedIndexSchemaFactory">
@@ -46,6 +49,7 @@ add: <lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthan
   -->
 
 ##### add dih update for http request handler
+
   <requestHandler name="/dihupdate" class="org.apache.solr.handler.dataimport.DataImportHandler" 
                   startup="lazy">
     <lst name="defaults">
@@ -55,6 +59,7 @@ add: <lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthan
 
 
 #### create data-config.xml file
+
 <dataConfig>
     <dataSource type="FileDataSource" encoding="UTF-8"/>
     <document>
