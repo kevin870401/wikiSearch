@@ -21,7 +21,8 @@ no event or log including here since they are too large.
 ### put input file into solr/server/solr/wiki/input
 
 ### change solr config
-*  managed-schema
+1. managed-schema
+
 rename it to schema.xml
 replace fields with below
     <field name="_version_" type="long" indexed="true" stored="true"/>
@@ -32,13 +33,13 @@ replace fields with below
     <field name="userId" type="int" indexed="true" stored="false" />
     <field name="text" type="text_en" indexed="true" stored="false" />
     
-* solrconfig.xml
+2. solrconfig.xml
 
-##### include dataimporthandler lib
+include dataimporthandler lib
 
 add: ```<lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthandler-.*\.jar"/>``` at line 86
 
-##### replace ManagedIndexSchemaFactory with classicIndex schemaFactory
+replace ManagedIndexSchemaFactory with classicIndex schemaFactory
     <schemaFactory class="ClassicIndexSchemaFactory"/>
     <!--
     <schemaFactory class="ManagedIndexSchemaFactory">
@@ -47,7 +48,7 @@ add: ```<lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimport
     </schemaFactory>
   -->
 
-##### add dih update for http request handler
+ add dih update for http request handler
 
     <requestHandler name="/dihupdate" class="org.apache.solr.handler.dataimport.DataImportHandler" 
                   startup="lazy">
@@ -56,7 +57,7 @@ add: ```<lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimport
     </lst></requestHandler>
 
 
-* create data-config.xml file
+3. create data-config.xml file
 
     <dataConfig>
     <dataSource type="FileDataSource" encoding="UTF-8"/>
