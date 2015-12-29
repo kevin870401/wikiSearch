@@ -36,7 +36,7 @@ replace fields with below
 
 ##### include dataimporthandler lib
 
-add: <lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthandler-.*\.jar"/> at line 86
+add: ```<lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthandler-.*\.jar"/>``` at line 86
 
 ##### replace ManagedIndexSchemaFactory with classicIndex schemaFactory
 
