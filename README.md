@@ -40,27 +40,27 @@ add: <lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthan
 
 ##### replace ManagedIndexSchemaFactory with classicIndex schemaFactory
 
-  <schemaFactory class="ClassicIndexSchemaFactory"/>
+  ```<schemaFactory class="ClassicIndexSchemaFactory"/>
     <!--
     <schemaFactory class="ManagedIndexSchemaFactory">
       <bool name="mutable">true</bool>
       <str name="managedSchemaResourceName">managed-schema</str>
     </schemaFactory>
-  -->
+  -->```
 
 ##### add dih update for http request handler
 
-  <requestHandler name="/dihupdate" class="org.apache.solr.handler.dataimport.DataImportHandler" 
+  ```<requestHandler name="/dihupdate" class="org.apache.solr.handler.dataimport.DataImportHandler" 
                   startup="lazy">
     <lst name="defaults">
       <str name="config">data-config.xml</str>
     </lst>
-  </requestHandler>
+  </requestHandler>```
 
 
 #### create data-config.xml file
 
-<dataConfig>
+```<dataConfig>
     <dataSource type="FileDataSource" encoding="UTF-8"/>
     <document>
         <entity name="page"
@@ -81,5 +81,5 @@ add: <lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthan
             <field column="$skipDoc" regrex="^#REDIRECT .*" replaceWith="true" sourceColName="text"/>
         </entity>
     </document>
-</dataConfig>
+</dataConfig>```
 
