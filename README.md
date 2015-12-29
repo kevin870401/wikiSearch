@@ -59,7 +59,7 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
 
 * create data-config.xml file
 
-    <dataConfig>
+```<dataConfig>
     <dataSource type="FileDataSource" encoding="UTF-8"/>
     <document>
         <entity name="page"
