@@ -49,17 +49,16 @@ add: ```<lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimport
 
 ##### add dih update for http request handler
 
-  ```<requestHandler name="/dihupdate" class="org.apache.solr.handler.dataimport.DataImportHandler" 
+    <requestHandler name="/dihupdate" class="org.apache.solr.handler.dataimport.DataImportHandler" 
                   startup="lazy">
     <lst name="defaults">
       <str name="config">data-config.xml</str>
-    </lst>
-  </requestHandler>```
+    </lst></requestHandler>
 
 
 #### create data-config.xml file
 
-```<dataConfig>
+    <dataConfig>
     <dataSource type="FileDataSource" encoding="UTF-8"/>
     <document>
         <entity name="page"
@@ -80,5 +79,5 @@ add: ```<lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimport
             <field column="$skipDoc" regrex="^#REDIRECT .*" replaceWith="true" sourceColName="text"/>
         </entity>
     </document>
-</dataConfig>```
+</dataConfig>
 
