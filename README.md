@@ -21,7 +21,7 @@ no event or log including here since they are too large.
 ### put input file into solr/server/solr/wiki/input
 
 ### change solr config
-1. managed-schema
+* managed-schema
 
 rename it to schema.xml
 replace fields with below
@@ -33,7 +33,7 @@ replace fields with below
     <field name="userId" type="int" indexed="true" stored="false" />
     <field name="text" type="text_en" indexed="true" stored="false" />
     
-2. solrconfig.xml
+* solrconfig.xml
 
 include dataimporthandler lib
 
@@ -57,7 +57,7 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
     </lst></requestHandler>
 
 
-3. create data-config.xml file
+* create data-config.xml file
 
     <dataConfig>
     <dataSource type="FileDataSource" encoding="UTF-8"/>
