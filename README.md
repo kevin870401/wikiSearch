@@ -39,14 +39,13 @@ replace fields with below
 add: ```<lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthandler-.*\.jar"/>``` at line 86
 
 ##### replace ManagedIndexSchemaFactory with classicIndex schemaFactory
-
-  ```<schemaFactory class="ClassicIndexSchemaFactory"/>
+    <schemaFactory class="ClassicIndexSchemaFactory"/>
     <!--
     <schemaFactory class="ManagedIndexSchemaFactory">
       <bool name="mutable">true</bool>
       <str name="managedSchemaResourceName">managed-schema</str>
     </schemaFactory>
-  -->```
+  -->
 
 ##### add dih update for http request handler
 
