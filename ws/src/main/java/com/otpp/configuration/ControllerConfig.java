@@ -29,7 +29,7 @@ public class ControllerConfig extends WebMvcConfigurerAdapter {
     }
     
     @Bean
-    public WikiController loginController() {
+    public WikiController wikiController() {
         WikiController controller = new WikiController();
         return controller;
     }

@@ -13,9 +13,9 @@ public class WikiController {
 
 
 
-  @RequestMapping(value = "/people", method = GET, headers = "Accept=application/json")
-  public @ResponseBody String getJivePeopleById(@RequestParam("id") long id) {
-    return "";
+  @RequestMapping(value = "/article", method = GET, headers = "Accept=application/json")
+  public @ResponseBody String getArticle() {
+    return "success";
 
   }
 
