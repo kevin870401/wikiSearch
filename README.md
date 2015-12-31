@@ -9,7 +9,7 @@ bin/ $ ./solr start
 ### Create core 'wiki':
 solr create -c wiki
 ./solr create -c wikimaster -d sample_techproducts_configs -p 8983 -rf 2
-
+./solr create -c wikislave -d sample_techproducts_configs -p 8983
 
 ### download wikipedia dump file:
 https://dumps.wikimedia.org/enwiki/latest/
