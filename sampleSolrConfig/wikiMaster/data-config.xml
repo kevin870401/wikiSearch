@@ -1,14 +1,11 @@
 <dataConfig>
     <dataSource type="FileDataSource" name="file" encoding="UTF-8"/>
-    <!--<dataSource type="JdbcDataSource" name="as400" driver="com.ibm.as400.access.AS400JDBCDriver"
-                url="jdbc:as400:TCHR400C;libraries=OTPPRFIL"
-                user="eisvdev" password="A1eminfo"/>-->
     <document>
         <entity name="page"
                 processor="XPathEntityProcessor"
                 stream="true"
                 forEach="/mediawiki/page/"
-                url="C:\kevin\solr-5.4.0\server\solr\wiki\input\enwiki-latest-pages-articles1.xml"
+                url="/home/kevin/solr-5.4.0/server/solr/wiki/input/enwiki-20151201-pages-articles1.xml"
                 transformer="RegexTransformer,DateFormatTransformer"
                 dataSource="file"
                 >
@@ -22,14 +19,5 @@
                    dateTimeFormat="yyy-MM-dd'T'hh:mm:ss'Z'"/>
             <field column="$skipDoc" regrex="^#REDIRECT .*" replaceWith="true" sourceColName="text"/>
         </entity>
-        <!--
-                <entity name="Contact" dataSource="as400" query="select * from EDP290">
-                    <field column="ID" name="id"/>
-                    <field column="EMPLOYER_IRN" name="irn"/>
-                    <field column="SALUTATION" name="salutation"/>
-                    <field column="FIRSTNAME" name="firstname"/>
-                    <field column="LANGUAGE" name="language"/>
-                </entity>
-                -->
     </document>
 </dataConfig>
