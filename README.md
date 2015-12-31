@@ -8,6 +8,8 @@ bin/ $ ./solr start
 
 ### Create core 'wiki':
 solr create -c wiki
+./solr create -c wikimaster -d sample_techproducts_configs -p 8983 -rf 2
+
 
 ### download wikipedia dump file:
 https://dumps.wikimedia.org/enwiki/latest/
