@@ -3,40 +3,30 @@ research project for solr
 
 ## Getting solr ready
 
-### start solr
-bin/ $ ./solr start
+### start solr instant at port 8983 (default port) and 9000:
+bin/ $ ./solr start -p 8983
+bin/ $ ./solr start -p 9000
 
 ### Create core 'wiki':
-solr create -c wiki
+creates 3 cores
+./solr create -c wiki
 ./solr create -c wikimaster -d sample_techproducts_configs -p 8983 -rf 2
-./solr create -c wikislave -d sample_techproducts_configs -p 8983
+./solr create -c wikislave -d sample_techproducts_configs -p 9000
 
-### download wikipedia dump file:
+please note that -d sample_techproducts_configs optional, it generate more configs from solr configset
+
+### download wikipedia article dump file from:
 https://dumps.wikimedia.org/enwiki/latest/
+enwiki-latest-stub-articles.xml.gz (full version)
+enwiki-latest-stub-articles1.xml.gz (first part of article dump)
+there are lots of event, log, history files there but we are not using those
 
-smaller file for German:
-this contains all Recombine articles, templates, media/file descriptions, and primary meta-pages.
-https://dumps.wikimedia.org/dewiki/20151226/dewiki-20151226-pages-articles.xml.bz2
-
-no event or log including here since they are too large.
-
-### put input file into solr/server/solr/wiki/input
+### put enwiki-latest-stub-articles1.xml file into solr/server/solr/wiki/input
+put enwiki-latest-stub-articles.xml file into solr/server/solr/wikimaster/input
 
 ### change solr config
-* managed-schema
 
-rename it to schema.xml
-replace fields with below
-
-    ```<field name="_version_" type="long" indexed="true" stored="true"/>
-    <field name="id" type="string" indexed="true" stored="true" required="true" />
-    <field name="title" type="string" indexed="true" stored="true"/>
-    <field name="revision" type="int" indexed="true" stored="false"/>
-    <field name="user" type="string" indexed="true" stored="false"/>
-    <field name="userId" type="int" indexed="true" stored="false" />
-    <field name="text" type="text_en" indexed="true" stored="false" /> ```
-   
-* solrconfig.xml
+* for every core folders change it's solrconfig.xml
 
 include dataimporthandler lib
 
@@ -59,6 +49,20 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
       <str name="config">data-config.xml</str>
     </lst></requestHandler>
 
+
+* managed-schema
+
+rename it to schema.xml
+replace fields with below
+
+    ```<field name="_version_" type="long" indexed="true" stored="true"/>
+    <field name="id" type="string" indexed="true" stored="true" required="true" />
+    <field name="title" type="string" indexed="true" stored="true"/>
+    <field name="revision" type="int" indexed="true" stored="false"/>
+    <field name="user" type="string" indexed="true" stored="false"/>
+    <field name="userId" type="int" indexed="true" stored="false" />
+    <field name="text" type="text_en" indexed="true" stored="false" /> ```
+   
 
 * create data-config.xml file
 
