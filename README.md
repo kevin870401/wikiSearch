@@ -144,6 +144,16 @@ ${your_master_solr location}/bin/ $ ./solr start -p 8983
 ${your_slave_solr}bin/ $ ./solr start -p 9000
 ```
 
-### init data import
-in your browser: http://localhost:8983/dihupdate or port 9000
+### xml data indexing
+in your browser: http://localhost:8983/dihupdate or port 9000 this will initialize a data import handler
+
 ![alt tag](https://raw.githubusercontent.com/kevin870401/wikiSearch/master/readmeResource/dihupdate.PNG)
+
+then execute the import
+http://localhost:8983/solr/wiki/dihupdate?command=full-import
+ or use UI
+
+![alt tag](https://raw.githubusercontent.com/kevin870401/wikiSearch/master/readmeResource/dihupdateExecute.PNG)
+
+### test query
+![alt tag](https://raw.githubusercontent.com/kevin870401/wikiSearch/master/readmeResource/solrQueryUI.PNG)
