@@ -52,7 +52,7 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
 
 * for slave core folder add below to solrconfig.xml
 
-```  <!-- Replication Handler -->
+    <!-- Replication Handler -->
      <requestHandler name="/replication" class="solr.ReplicationHandler" >
           <lst name="slave">
                <!--fully qualified url for the replication handler of master. It is possible
