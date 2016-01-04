@@ -2,15 +2,19 @@
 research project for solr
 
 ## Getting solr ready
+### Download solr
+download the latest one from http://www.apache.org/dyn/closer.lua/lucene/solr
+and unarchive it to two different location, we use it for master and slave config
 
 ### start solr instant at port 8983 (default port) and 9000:
-bin/ $ ./solr start -p 8983
-bin/ $ ./solr start -p 9000
-
-### Create core 'wiki':
-creates 3 cores
 ```
-./solr create -c wiki
+${your_master_solr location}/bin/ $ ./solr start -p 8983
+${your_slave_solr}bin/ $ ./solr start -p 9000
+```
+### creates 3 cores:
+
+```
+./solr create -c wiki -p 8983
 ./solr create -c wikimaster -d sample_techproducts_configs -p 8983 -rf 2
 ./solr create -c wikislave -d sample_techproducts_configs -p 9000
 ```
@@ -24,8 +28,12 @@ https://dumps.wikimedia.org/enwiki/latest/
 there are lots of event, log, history files there but we are not using those
 
 ### unarchive these two files
+
 put enwiki-latest-stub-articles1.xml file into solr/server/solr/wiki/input
+
 put enwiki-latest-stub-articles.xml file into solr/server/solr/wikimaster/input
+
+no input file is needed for slave
 
 ### change solr config
 
@@ -122,3 +130,25 @@ replace fields with below
           </lst>
      </requestHandler>
 ```
+
+### stop all
+
+```
+${your_master_solr location}/bin/ $ ./solr stop -all
+${your_slave_solr}bin/ $ ./solr stop -all
+```
+
+### stop all
+
+```
+${your_master_solr location}/bin/ $ ./solr stop -all
+${your_slave_solr}bin/ $ ./solr stop -all
+```
+
+### start solr instant at port 8983 (default port) and 9000:
+```
+${your_master_solr location}/bin/ $ ./solr start -p 8983
+${your_slave_solr}bin/ $ ./solr start -p 9000
+```
+
+### init data import
