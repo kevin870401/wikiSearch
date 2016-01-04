@@ -65,7 +65,7 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
                But a fetchindex can be triggered from the admin or the http API -->
                <str name="pollInterval">00:30:00</str>
           </lst>
-     </requestHandler>```
+     </requestHandler>
 
 * managed-schema
 
