@@ -57,8 +57,19 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
                <str name="pollInterval">00:30:00</str>
           </lst>
      </requestHandler>```
-
-
+* for master core folder add below to solrconfig.xml     
+```     <requestHandler name="/replication" class="solr.ReplicationHandler" >
+          <lst name="master">
+               <str name="replicateAfter">optimize</str>
+               <str name="backupAfter">optimize</str>
+               <str name="confFiles">solrconfig_slave.xml:solrconfig.xml,x.xml,y.xml</str>
+               <str name="commitReserveDuration">00:00:10</str>
+          </lst>    
+          <int name="maxNumberOfBackups">2</int>
+          <lst name="invariants">
+               <str name="maxWriteMBPerSec">16</str>
+          </lst>
+     </requestHandler>```
 * managed-schema
 
 rename it to schema.xml
