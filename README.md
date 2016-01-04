@@ -50,15 +50,10 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
       <str name="config">data-config.xml</str>
     </lst></requestHandler>
 
-* for slave core folder add below to solrconfig.xml     
-``` <requestHandler name="/replication" class="solr.ReplicationHandler" >
-          <lst name="slave">
-               <str name="masterUrl">http://localhost:8983/solr/wikimaster/replication</str>
-               <str name="pollInterval">00:30:00</str>
-          </lst>
-     </requestHandler>```
+
 * for master core folder add below to solrconfig.xml     
-```     <requestHandler name="/replication" class="solr.ReplicationHandler" >
+```
+<requestHandler name="/replication" class="solr.ReplicationHandler" >
           <lst name="master">
                <str name="replicateAfter">optimize</str>
                <str name="backupAfter">optimize</str>
@@ -69,43 +64,54 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
           <lst name="invariants">
                <str name="maxWriteMBPerSec">16</str>
           </lst>
-     </requestHandler>```
-* managed-schema
+     </requestHandler>
+```
+
+* for master core edit managed-schema
 
 rename it to schema.xml
 replace fields with below
 
-    ```<field name="_version_" type="long" indexed="true" stored="true"/>
-    <field name="id" type="string" indexed="true" stored="true" required="true" />
+    ```    <field name="_version_" type="long" indexed="true" stored="true"/>
+    <field name="id" type="string" indexed="true" stored="true" required="true"/>
     <field name="title" type="string" indexed="true" stored="true"/>
-    <field name="revision" type="int" indexed="true" stored="false"/>
-    <field name="user" type="string" indexed="true" stored="false"/>
-    <field name="userId" type="int" indexed="true" stored="false" />
-    <field name="text" type="text_en" indexed="true" stored="false" /> ```
+    <field name="revision" type="int" indexed="true" stored="true"/>
+    <field name="user" type="string" indexed="true" stored="true"/>
+    <field name="userId" type="int" indexed="true" stored="true"/>
+    <field name="text" type="text_en" indexed="true" stored="true"/>
+    <field name="timestamp" type="date" indexed="true" stored="true"/>
+     ```
    
 
-* create data-config.xml file
+* for master core create data-config.xml file
 
 ```<dataConfig>
-    <dataSource type="FileDataSource" encoding="UTF-8"/>
+    <dataSource type="FileDataSource" name="file" encoding="UTF-8"/>
     <document>
-        <com.otpp.data.entity name="page"
+        <entity name="page"
                 processor="XPathEntityProcessor"
                 stream="true"
                 forEach="/mediawiki/page/"
-                url="C:\kevin\solr-5.4.0\server\solr\wiki\input\dewiki-20151226-pages-articles.xml"
+                url="/home/kevin/solr-5.4.0/server/solr/wiki/input/enwiki-20151201-pages-articles1.xml"
                 transformer="RegexTransformer,DateFormatTransformer"
+                dataSource="file"
                 >
             <field column="id" xpath="/mediawiki/page/id"/>
-            <field column="title" xpath="/mediawiki/page/id"/>
-            <field column="revision" xpath="/mediawiki/page/id"/>
-            <field column="user" xpath="/mediawiki/page/id"/>
-            <field column="userId" xpath="/mediawiki/page/id"/>
-            <field column="text" xpath="/mediawiki/page/id"/>
-            <field column="timestamp" xpath="/mediawiki/page/revision/timestamp"
-                   dateTimeFormat="yyy-MM-dd'T'hh:mm:ss'X'"/>
-            <field column="$skipDoc" regrex="^#REDIRECT .*" replaceWith="true" sourceColName="text"/>
-        </com.otpp.data.entity>
+            <field column="title" xpath="/mediawiki/page/title"/>
+            <field column="revision" xpath="/mediawiki/page/revision/id"/>
+            <field column="user" xpath="/mediawiki/page/revision/contributor/username"/>
+            <field column="userId" xpath="/mediawiki/page/revision/contributor/id"/>
+            <field column="text" xpath="/mediawiki/page/revision/text"/>
+            <field column="timestamp" xpath="/mediawiki/page/revision/timestamp" dateTimeFormat="yyyy-MM-dd'T'hh:mm:ss'Z'"/>
+            <field column="$skipDoc" regex="^#REDIRECT .*" replaceWith="true" sourceColName="text"/>
+        </entity>
     </document>
 </dataConfig>
-
+```
+* for slave core folder add below to solrconfig.xml     
+``` <requestHandler name="/replication" class="solr.ReplicationHandler" >
+          <lst name="slave">
+               <str name="masterUrl">http://localhost:8983/solr/wikimaster/replication</str>
+               <str name="pollInterval">00:30:00</str>
+          </lst>
+     </requestHandler>```
