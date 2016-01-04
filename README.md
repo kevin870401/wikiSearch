@@ -43,13 +43,13 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
   -->
 
  add dih update for http request handler
-
-    <requestHandler name="/dihupdate" class="org.apache.solr.handler.dataimport.DataImportHandler" 
-                  startup="lazy">
+```
+<requestHandler name="/dihupdate" class="org.apache.solr.handler.dataimport.DataImportHandler" startup="lazy">
     <lst name="defaults">
       <str name="config">data-config.xml</str>
-    </lst></requestHandler>
-
+    </lst>
+</requestHandler>
+```
 
 * for master core folder add below to solrconfig.xml     
 ```
@@ -109,9 +109,11 @@ replace fields with below
 </dataConfig>
 ```
 * for slave core folder add below to solrconfig.xml     
-``` <requestHandler name="/replication" class="solr.ReplicationHandler" >
+```
+<requestHandler name="/replication" class="solr.ReplicationHandler" >
           <lst name="slave">
                <str name="masterUrl">http://localhost:8983/solr/wikimaster/replication</str>
                <str name="pollInterval">00:30:00</str>
           </lst>
-     </requestHandler>```
+     </requestHandler>
+```
