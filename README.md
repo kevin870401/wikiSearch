@@ -34,14 +34,16 @@ include dataimporthandler lib
 add: ```<lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthandler-.*\.jar"/>``` at line 86
 
 replace ManagedIndexSchemaFactory with classicIndex schemaFactory
-```<schemaFactory class="ClassicIndexSchemaFactory"/>```
-    <!--
+```
+<schemaFactory class="ClassicIndexSchemaFactory"/>
+
+<!--
     <schemaFactory class="ManagedIndexSchemaFactory">
       <bool name="mutable">true</bool>
       <str name="managedSchemaResourceName">managed-schema</str>
     </schemaFactory>
   -->
-
+```
  add DataImportHandler
 ```
 <requestHandler name="/dihupdate" class="org.apache.solr.handler.dataimport.DataImportHandler" startup="lazy">
@@ -72,7 +74,8 @@ add replicationHandler
 rename it to schema.xml
 replace fields with below
 
-    ```    <field name="_version_" type="long" indexed="true" stored="true"/>
+```
+    <field name="_version_" type="long" indexed="true" stored="true"/>
     <field name="id" type="string" indexed="true" stored="true" required="true"/>
     <field name="title" type="string" indexed="true" stored="true"/>
     <field name="revision" type="int" indexed="true" stored="true"/>
@@ -80,7 +83,7 @@ replace fields with below
     <field name="userId" type="int" indexed="true" stored="true"/>
     <field name="text" type="text_en" indexed="true" stored="true"/>
     <field name="timestamp" type="date" indexed="true" stored="true"/>
-     ```
+```
    
 
 * for master core create data-config.xml file
