@@ -138,13 +138,6 @@ ${your_master_solr location}/bin/ $ ./solr stop -all
 ${your_slave_solr}bin/ $ ./solr stop -all
 ```
 
-### stop all
-
-```
-${your_master_solr location}/bin/ $ ./solr stop -all
-${your_slave_solr}bin/ $ ./solr stop -all
-```
-
 ### start solr instant at port 8983 (default port) and 9000:
 ```
 ${your_master_solr location}/bin/ $ ./solr start -p 8983
@@ -152,3 +145,5 @@ ${your_slave_solr}bin/ $ ./solr start -p 9000
 ```
 
 ### init data import
+in your browser: http://localhost:8983/dihupdate or port 9000
+![alt tag](https://raw.githubusercontent.com/kevin870401/wikiSearch/master/readmeResource/dihupdate.PNG)
