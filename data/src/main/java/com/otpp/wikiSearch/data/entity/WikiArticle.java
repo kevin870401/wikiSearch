@@ -8,15 +8,31 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 import java.util.Date;
 
 @Data
-@SolrDocument(solrCoreName = "wiki")
+@SolrDocument(solrCoreName = "wikimaster")
 public class WikiArticle {
-    private @Id @Indexed String id;
-    private @Indexed("title") String title;
-    private @Indexed("revision") int revision;
-    private @Indexed("user") String user;
-    private @Indexed("userId") int userId;
-    private @Indexed("text") String text;
-    private @Indexed("time") Date time;
+
+    private
+    @Id
+    @Indexed
+    String id;
+    private
+    @Indexed("title")
+    String title;
+    private
+    @Indexed("revision")
+    int revision;
+    private
+    @Indexed("user")
+    String user;
+    private
+    @Indexed("userId")
+    int userId;
+    private
+    @Indexed("text")
+    String text;
+    private
+    @Indexed("time")
+    Date time;
 
     @Override
     public String toString() {
