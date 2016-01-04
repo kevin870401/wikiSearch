@@ -21,7 +21,8 @@ enwiki-latest-stub-articles.xml.gz (full version)
 enwiki-latest-stub-articles1.xml.gz (first part of article dump)
 there are lots of event, log, history files there but we are not using those
 
-### put enwiki-latest-stub-articles1.xml file into solr/server/solr/wiki/input
+### unarchive these two files
+put enwiki-latest-stub-articles1.xml file into solr/server/solr/wiki/input
 put enwiki-latest-stub-articles.xml file into solr/server/solr/wikimaster/input
 
 ### change solr config
@@ -49,6 +50,22 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
       <str name="config">data-config.xml</str>
     </lst></requestHandler>
 
+* for slave core folder add below to solrconfig.xml
+
+```  <!-- Replication Handler -->
+     <requestHandler name="/replication" class="solr.ReplicationHandler" >
+          <lst name="slave">
+               <!--fully qualified url for the replication handler of master. It is possible
+               to pass on this as
+               a request param for the fetchindex command-->
+               <str name="masterUrl">http://localhost:8983/solr/wikimaster/replication</str>
+               <!--Interval in which the slave should poll master .Format is HH:mm:ss . If
+               this is absent slave does not
+               poll automatically.
+               But a fetchindex can be triggered from the admin or the http API -->
+               <str name="pollInterval">00:30:00</str>
+          </lst>
+     </requestHandler>```
 
 * managed-schema
 
