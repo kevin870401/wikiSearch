@@ -27,14 +27,14 @@ put enwiki-latest-stub-articles.xml file into solr/server/solr/wikimaster/input
 
 ### change solr config
 
-* for every core folders change it's solrconfig.xml
+* for master core folders change it's solrconfig.xml
 
 include dataimporthandler lib
 
 add: ```<lib dir="${solr.install.dir:../../../..}/dist/" regrex="solr-dataimporthandler-.*\.jar"/>``` at line 86
 
 replace ManagedIndexSchemaFactory with classicIndex schemaFactory
-    <schemaFactory class="ClassicIndexSchemaFactory"/>
+```<schemaFactory class="ClassicIndexSchemaFactory"/>```
     <!--
     <schemaFactory class="ManagedIndexSchemaFactory">
       <bool name="mutable">true</bool>
@@ -42,7 +42,7 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
     </schemaFactory>
   -->
 
- add dih update for http request handler
+ add DataImportHandler
 ```
 <requestHandler name="/dihupdate" class="org.apache.solr.handler.dataimport.DataImportHandler" startup="lazy">
     <lst name="defaults">
@@ -50,8 +50,8 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
     </lst>
 </requestHandler>
 ```
-
-* for master core folder add below to solrconfig.xml     
+add replicationHandler
+    
 ```
 <requestHandler name="/replication" class="solr.ReplicationHandler" >
           <lst name="master">
