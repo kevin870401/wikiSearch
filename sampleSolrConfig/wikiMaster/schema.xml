@@ -118,12 +118,13 @@
       -->
 
     <field name="_version_" type="long" indexed="true" stored="true"/>
-    <field name="id" type="string" indexed="true" stored="true" required="true" />
+    <field name="id" type="string" indexed="true" stored="true" required="true"/>
     <field name="title" type="string" indexed="true" stored="true"/>
-    <field name="revision" type="int" indexed="true" stored="false"/>
-    <field name="user" type="string" indexed="true" stored="false"/>
-    <field name="userId" type="int" indexed="true" stored="false" />
-    <field name="text" type="text_en" indexed="true" stored="false" />
+    <field name="revision" type="int" indexed="true" stored="true"/>
+    <field name="user" type="string" indexed="true" stored="true"/>
+    <field name="userId" type="int" indexed="true" stored="true"/>
+    <field name="text" type="text_en" indexed="true" stored="true"/>
+    <field name="timestamp" type="date" indexed="true" stored="true"/>
     <uniqueKey>id</uniqueKey>
     <!--
       <field name="_version_" type="long" indexed="true" stored="true"/>
@@ -134,7 +135,7 @@
       <field name="language" type="string" indexed="true" stored="true"/>
       <uniqueKey>id</uniqueKey>
        -->
-    <!-- Dynamic field definitions allow using convention over configuration
+    <!-- Dynamic field definitions allow using convention over com.otpp.data.configuration
        for fields via the specification of patterns to match field names.
        EXAMPLE:  name="*_i" will match any field ending in _i (like myid_i, z_i)
        RESTRICTION: the glob-like pattern in the name attribute must have
@@ -664,7 +665,7 @@
         </analyzer>
     </fieldType>
 
-    <!-- CJK bigram (see text_ja for a Japanese configuration using morphological analysis) -->
+    <!-- CJK bigram (see text_ja for a Japanese com.otpp.data.configuration using morphological analysis) -->
     <dynamicField name="*_txt_cjk" type="text_cjk" indexed="true" stored="true"/>
     <fieldType name="text_cjk" class="solr.TextField" positionIncrementGap="100">
         <analyzer>
@@ -880,7 +881,7 @@
         </analyzer>
     </fieldType>
 
-    <!-- Japanese using morphological analysis (see text_cjk for a configuration using bigramming)
+    <!-- Japanese using morphological analysis (see text_cjk for a com.otpp.data.configuration using bigramming)
 
          NOTE: If you want to optimize search for precision, use default operator AND in your query
          parser config with <solrQueryParser defaultOperator="AND"/> further down in this file.  Use 

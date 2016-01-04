@@ -65,7 +65,7 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
 ```<dataConfig>
     <dataSource type="FileDataSource" encoding="UTF-8"/>
     <document>
-        <entity name="page"
+        <com.otpp.data.entity name="page"
                 processor="XPathEntityProcessor"
                 stream="true"
                 forEach="/mediawiki/page/"
@@ -81,7 +81,7 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
             <field column="timestamp" xpath="/mediawiki/page/revision/timestamp"
                    dateTimeFormat="yyy-MM-dd'T'hh:mm:ss'X'"/>
             <field column="$skipDoc" regrex="^#REDIRECT .*" replaceWith="true" sourceColName="text"/>
-        </entity>
+        </com.otpp.data.entity>
     </document>
 </dataConfig>
 

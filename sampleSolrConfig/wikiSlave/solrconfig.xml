@@ -21,7 +21,7 @@
      this file, see http://wiki.apache.org/solr/SolrConfigXml. 
 -->
 <config>
-  <!-- In all configuration below, a prefix of "solr." for class names
+  <!-- In all com.otpp.data.configuration below, a prefix of "solr." for class names
        is an alias that causes solr to search appropriate packages,
        including org.apache.solr.(search|update|request|core|analysis)
 
@@ -97,7 +97,7 @@
        Used to specify an alternate directory to hold all index data
        other than the default ./data under the Solr home.  If
        replication is in use, this should match the replication
-       configuration.
+       com.otpp.data.configuration.
     -->
   <dataDir>${solr.data.dir:}</dataDir>
 
@@ -287,7 +287,7 @@
        
        This example enables JMX if and only if an existing MBeanServer
        is found, use this if you want to configure JMX through JVM
-       parameters. Remove this to disable exposing Solr configuration
+       parameters. Remove this to disable exposing Solr com.otpp.data.configuration
        and statistics to JMX.
 
        For more details see http://wiki.apache.org/solr/SolrJmx
@@ -1151,7 +1151,7 @@
        <searchComponent name="stats"     class="solr.StatsComponent" />
        <searchComponent name="debug"     class="solr.DebugComponent" />
    
-       Default configuration in a requestHandler would look like:
+       Default com.otpp.data.configuration in a requestHandler would look like:
 
        <arr name="components">
          <str>query</str>
@@ -1306,10 +1306,10 @@
 
   <!-- The SuggestComponent in Solr provides users with automatic suggestions for query terms. 
        You can use this to implement a powerful auto-suggest feature in your search application.
-       As with the rest of this solrconfig.xml file, the configuration of this component is purely
+       As with the rest of this solrconfig.xml file, the com.otpp.data.configuration of this component is purely
        an example that applies specifically to this configset and example documents. 
        
-       More information about this component and other configuration options are described in the
+       More information about this component and other com.otpp.data.configuration options are described in the
        "Suggester" section of the reference guide available at 
        http://archive.apache.org/dist/lucene/solr/ref-guide
     -->
