@@ -11,7 +11,7 @@ and unarchive it to two different location, we use it for master and slave confi
 ${your_master_solr location}/bin/ $ ./solr start -p 8983
 ${your_slave_solr}bin/ $ ./solr start -p 9000
 ```
-### creates 3 cores:
+### creates 2 cores:
 
 ```
 ./solr create -c wikimaster -d sample_techproducts_configs -p 8983 -rf 2
