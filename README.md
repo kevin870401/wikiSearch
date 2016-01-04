@@ -17,8 +17,8 @@ please note that -d sample_techproducts_configs optional, it generate more confi
 
 ### download wikipedia article dump file from:
 https://dumps.wikimedia.org/enwiki/latest/
-enwiki-latest-stub-articles.xml.gz (full version)
-enwiki-latest-stub-articles1.xml.gz (first part of article dump)
+*enwiki-latest-stub-articles.xml.gz (full version)
+*enwiki-latest-stub-articles1.xml.gz (first part of article dump)
 there are lots of event, log, history files there but we are not using those
 
 ### unarchive these two files
