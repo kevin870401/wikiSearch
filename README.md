@@ -9,10 +9,11 @@ bin/ $ ./solr start -p 9000
 
 ### Create core 'wiki':
 creates 3 cores
+```
 ./solr create -c wiki
 ./solr create -c wikimaster -d sample_techproducts_configs -p 8983 -rf 2
 ./solr create -c wikislave -d sample_techproducts_configs -p 9000
-
+```
 please note that -d sample_techproducts_configs optional, it generate more configs from solr configset
 
 ### download wikipedia article dump file from:
