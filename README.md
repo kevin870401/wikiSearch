@@ -14,7 +14,6 @@ ${your_slave_solr}bin/ $ ./solr start -p 9000
 ### creates 3 cores:
 
 ```
-./solr create -c wiki -p 8983
 ./solr create -c wikimaster -d sample_techproducts_configs -p 8983 -rf 2
 ./solr create -c wikislave -d sample_techproducts_configs -p 9000
 ```
