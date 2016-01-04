@@ -53,14 +53,7 @@ replace ManagedIndexSchemaFactory with classicIndex schemaFactory
 * for slave core folder add below to solrconfig.xml     
 ``` <requestHandler name="/replication" class="solr.ReplicationHandler" >
           <lst name="slave">
-               <!--fully qualified url for the replication handler of master. It is possible
-               to pass on this as
-               a request param for the fetchindex command-->
                <str name="masterUrl">http://localhost:8983/solr/wikimaster/replication</str>
-               <!--Interval in which the slave should poll master .Format is HH:mm:ss . If
-               this is absent slave does not
-               poll automatically.
-               But a fetchindex can be triggered from the admin or the http API -->
                <str name="pollInterval">00:30:00</str>
           </lst>
      </requestHandler>```
