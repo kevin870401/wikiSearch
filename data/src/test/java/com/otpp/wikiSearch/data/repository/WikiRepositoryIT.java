@@ -10,28 +10,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ContextConfiguration(classes = SolrContext.class)
-public class WikiRepositoryTest extends AbstractTestNGSpringContextTests {
+public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
 
     private static final String AFGHANISTAN = "Afghanistan";
+
     @Autowired
     private WikiRepository wikiRepository;
-
-    @BeforeMethod
-    public void setUp() throws Exception {
-
-    }
-
-    @AfterMethod
-    public void tearDown() throws Exception {
-
-    }
 
     @Test
     public void findByTitleIn_plainString_exist() {

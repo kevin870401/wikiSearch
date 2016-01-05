@@ -1,6 +1,9 @@
 package com.otpp.configuration;
 
 import com.otpp.controller.WikiController;
+import com.otpp.wikiSearch.data.entity.WikiArticle;
+import com.otpp.wikisearch.service.WikiService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -14,6 +17,8 @@ import java.util.List;
 @Configuration
 public class ControllerConfig extends WebMvcConfigurerAdapter {
 
+    @Autowired
+    private WikiService wikiService;
     
     @Bean
     public RestTemplate restTemplate(){
@@ -30,7 +35,7 @@ public class ControllerConfig extends WebMvcConfigurerAdapter {
     
     @Bean
     public WikiController wikiController() {
-        WikiController controller = new WikiController();
+        WikiController controller = new WikiController(wikiService);
         return controller;
     }
 
