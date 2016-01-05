@@ -1,4 +1,4 @@
-package com.otpp.wikisearch.service.mappers;
+package com.otpp.wikisearch.domain.mappers;
 
 import ma.glasnost.orika.MapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;

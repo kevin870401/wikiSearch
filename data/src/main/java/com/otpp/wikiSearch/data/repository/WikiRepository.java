@@ -1,6 +1,7 @@
 package com.otpp.wikiSearch.data.repository;
 
 import com.otpp.wikiSearch.data.entity.WikiArticle;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.Query.Operator;
 import org.springframework.data.solr.core.query.result.FacetPage;
@@ -23,11 +24,10 @@ public interface WikiRepository extends SolrCrudRepository<WikiArticle, String>,
     @Facet(fields = {"user"})
     FacetPage<WikiArticle> findByTitleStartsWith(Collection<String> titleFragments, Pageable pagebale);
 
-    @Facet(fields = {"id"})
-    FacetPage<WikiArticle> findByTextContaining(Collection<String> textFragments, Pageable pagebale);
-
     @Facet(fields = {"user"}, minCount = 1, limit = 1)
     @Query(value = "*:*")
     FacetPage<WikiArticle> getUsersFacetSortedByArticleCount(Pageable page);
+
+    Page<WikiArticle> findByTextContaining(Collection<String> textFragments, Pageable pagebale);
 
 }

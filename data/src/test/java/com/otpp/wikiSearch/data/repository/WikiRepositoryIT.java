@@ -18,16 +18,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
 
     private static final String AFGHANISTAN = "Afghanistan";
+    private static final Pageable FIRST_TEN = new PageRequest(0, 10);
 
     @Autowired
     private WikiRepository wikiRepository;
 
     @Test
     public void findByTitleIn_plainString_exist() {
-        Pageable pageable = new PageRequest(0, 10);
         Page<WikiArticle> wikiArticles =
                 wikiRepository.findByTitleIn(QueryUtil.splitSearchTermAndRemoveIgnoredCharacters(AFGHANISTAN),
-                        pageable);
+                        FIRST_TEN);
         assertThat(wikiArticles.getTotalPages() == 1);
         assertThat(wikiArticles.getContent()
                                .get(0)
@@ -36,9 +36,8 @@ public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByTitleIn_StringContainsSpace_notExist() {
-        Pageable pageable = new PageRequest(0, 10);
         Page<WikiArticle> wikiArticles = wikiRepository.findByTitleIn(
-                QueryUtil.splitSearchTermAndRemoveIgnoredCharacters("Afghanistan communication"), pageable);
+                QueryUtil.splitSearchTermAndRemoveIgnoredCharacters("Afghanistan communication"), FIRST_TEN);
         assertThat(wikiArticles.getTotalPages() == 1);
         assertThat(wikiArticles.getContent()
                                .size() == 0);
@@ -52,10 +51,9 @@ public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByTitleStartsWith_afghanistan_9ArticlesFound() {
-        Pageable pageable = new PageRequest(0, 10);
         Page<WikiArticle> wikiArticles =
                 wikiRepository.findByTitleStartsWith(QueryUtil.splitSearchTermAndRemoveIgnoredCharacters(AFGHANISTAN),
-                        pageable);
+                        FIRST_TEN);
         assertThat(wikiArticles.getSize()).isEqualTo(10);
         assertThat(wikiArticles.getTotalPages()).isEqualTo(1);
         assertThat(wikiArticles.getContent()
@@ -64,25 +62,22 @@ public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByTitleStartsWith_a_highestUserCountFoundInFacet() {
-        Pageable pageable = new PageRequest(0, 10);
         FacetPage<WikiArticle> wikiArticles =
                 wikiRepository.findByTitleStartsWith(QueryUtil.splitSearchTermAndRemoveIgnoredCharacters("A"),
-                        pageable);
+                        FIRST_TEN);
         assertThat(wikiRepository.getTopContributorUserName(wikiArticles)).isEqualTo("Jim Carter");
         assertThat(wikiRepository.getTopContributorArticleNumber(wikiArticles)).isEqualTo(47);
     }
 
     @Test
     public void getTopContributorUserName_JimCarter() {
-        Pageable pageable = new PageRequest(0, 10);
-        FacetPage<WikiArticle> wikiArticles = wikiRepository.getUsersFacetSortedByArticleCount(pageable);
+        FacetPage<WikiArticle> wikiArticles = wikiRepository.getUsersFacetSortedByArticleCount(FIRST_TEN);
         assertThat(wikiRepository.getTopContributorUserName(wikiArticles)).isEqualTo("Jim Carter");
     }
 
     @Test
     public void getTopContributorArticleNumber_164() {
-        Pageable pageable = new PageRequest(0, 10);
-        FacetPage<WikiArticle> wikiArticles = wikiRepository.getUsersFacetSortedByArticleCount(pageable);
+        FacetPage<WikiArticle> wikiArticles = wikiRepository.getUsersFacetSortedByArticleCount(FIRST_TEN);
         assertThat(wikiRepository.getTopContributorArticleNumber(wikiArticles)).isEqualTo(164);
     }
 
@@ -98,4 +93,27 @@ public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
                 QueryUtil.splitSearchTermAndRemoveIgnoredCharacters(AFGHANISTAN))).isEqualTo(9);
     }
 
+    //--------text related tests------------
+
+    @Test
+    public void findByTextContaining_kevin_manyArticlesFound() {
+        Page result = wikiRepository.findByTextContaining(QueryUtil.splitSearchTermAndRemoveIgnoredCharacters("kevin"),
+                FIRST_TEN);
+        assertThat(result.getNumber()).isEqualTo(0); // current page number
+        assertThat(result.getTotalElements()).isEqualTo(355); //total elements
+        assertThat(result.getTotalPages()).isEqualTo(36); //total amount of pages
+        assertThat(result.getNumberOfElements()).isEqualTo(10);// total elements in current page
+        assertThat(result.getSize()).isEqualTo(10); // maximum element in this page
+    }
+
+    @Test
+    public void findByTextContaining_yinan_1ArticlesFound() {
+        Page result = wikiRepository.findByTextContaining(QueryUtil.splitSearchTermAndRemoveIgnoredCharacters("yinan"),
+                FIRST_TEN);
+        assertThat(result.getNumber()).isEqualTo(0);
+        assertThat(result.getTotalElements()).isEqualTo(1);
+        assertThat(result.getTotalPages()).isEqualTo(1);
+        assertThat(result.getNumberOfElements()).isEqualTo(1);
+        assertThat(result.getSize()).isEqualTo(10);
+    }
 }

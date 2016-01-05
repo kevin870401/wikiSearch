@@ -2,7 +2,7 @@ package com.otpp.wikisearch.service.config;
 
 import com.otpp.wikiSearch.data.repository.WikiRepository;
 import com.otpp.wikisearch.service.WikiService;
-import com.otpp.wikisearch.service.mappers.WikiArticleMapper;
+import com.otpp.wikisearch.domain.mappers.WikiArticleMapper;
 import com.otpp.wikisearch.service.serviceImpl.WikiServiceImpl;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
@@ -16,18 +16,11 @@ public class WikiConfig {
     @Autowired
     private WikiRepository wikiRepository;
 
-    @Bean
-    public WikiArticleMapper wikiArticleMapper() {
-        return new WikiArticleMapper(defaultMapperFactory());
-    }
-
-    @Bean
-    public MapperFactory defaultMapperFactory() {
-        return new DefaultMapperFactory.Builder().build();
-    }
+    @Autowired
+    public WikiArticleMapper wikiArticleMapper;
 
     @Bean
     public WikiService wikiService() {
-        return new WikiServiceImpl(wikiRepository, wikiArticleMapper());
+        return new WikiServiceImpl(wikiRepository, wikiArticleMapper);
     }
 }

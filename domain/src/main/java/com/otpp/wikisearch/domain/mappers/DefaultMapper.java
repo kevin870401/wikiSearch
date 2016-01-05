@@ -1,4 +1,4 @@
-package com.otpp.wikisearch.service.mappers;
+package com.otpp.wikisearch.domain.mappers;
 
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
@@ -42,9 +42,9 @@ public abstract class DefaultMapper<DomainClass, DatabaseClass> {
     }
 
     /*
-     * Subclasses that need to change the mapper factory configuration can override this method.
+     * Subclasses that need to change the mappers factory configuration can override this method.
      * Common use cases for overriding are when most of the fields are copied by default but there are some exceptions,
-     * mappers can still use the default mapper but need to specify additionally the mappings for the exceptional
+     * mappers can still use the default mappers but need to specify additionally the mappings for the exceptional
      * fields.
      */
     protected void configureMapperFactory() {
