@@ -27,7 +27,7 @@ public interface WikiRepository extends SolrCrudRepository<WikiArticle, String>,
     @Facet(fields = {"user"})
     FacetPage<WikiArticle> findByTitleStartsWith(@Param("title")Collection<String> titleFragments, Pageable pagebale);
 
-    @Facet(fields = {"user"}, minCount = 1, limit = 1)
+    @Facet(fields = {"user"}, minCount = 1)
     @Query(value = "*:*")
     FacetPage<WikiArticle> getUsersFacetSortedByArticleCount(Pageable page);
 

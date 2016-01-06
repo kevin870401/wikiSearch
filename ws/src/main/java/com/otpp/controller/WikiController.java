@@ -1,9 +1,12 @@
 package com.otpp.controller;
 
+import com.otpp.wikisearch.domain.WikiFacet;
 import com.otpp.wikisearch.service.WikiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -43,5 +46,12 @@ public class WikiController {
     @ResponseBody
     long getTopContributorArticleAmount() {
         return wikiService.getTopContributorArticleAmount();
+    }
+
+    @RequestMapping(value = "/topAuthors", method = GET, headers = "Accept=application/json")
+    public
+    @ResponseBody
+    List<WikiFacet> getTopContributors() {
+        return wikiService.getTopContributors();
     }
 }

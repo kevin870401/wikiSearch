@@ -1,6 +1,7 @@
 package com.otpp.wikisearch.service.config;
 
 import com.otpp.wikiSearch.data.repository.WikiRepository;
+import com.otpp.wikisearch.domain.mappers.WikiFacetMapper;
 import com.otpp.wikisearch.service.WikiService;
 import com.otpp.wikisearch.domain.mappers.WikiArticleMapper;
 import com.otpp.wikisearch.service.serviceImpl.WikiServiceImpl;
@@ -19,8 +20,11 @@ public class WikiConfig {
     @Autowired
     public WikiArticleMapper wikiArticleMapper;
 
+    @Autowired
+    public WikiFacetMapper wikiFacetMapper;
+
     @Bean
     public WikiService wikiService() {
-        return new WikiServiceImpl(wikiRepository, wikiArticleMapper);
+        return new WikiServiceImpl(wikiRepository, wikiArticleMapper,wikiFacetMapper);
     }
 }

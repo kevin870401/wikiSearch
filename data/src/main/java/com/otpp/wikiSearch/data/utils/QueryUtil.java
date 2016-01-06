@@ -1,9 +1,13 @@
 package com.otpp.wikiSearch.data.utils;
 
+import com.otpp.wikiSearch.data.entity.WikiFacet;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.solr.core.query.result.SimpleFacetFieldEntry;
+import org.springframework.data.solr.core.query.result.ValueCountEntry;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -21,5 +25,15 @@ public class QueryUtil {
             }
         }
         return result;
+    }
+
+    public static List<WikiFacet> convertWikiUserFromFacetPage(Iterator<SimpleFacetFieldEntry>
+            simpleFacetFieldEntryIterator){
+        List<WikiFacet> wikiFacets = new ArrayList<>();
+        while (simpleFacetFieldEntryIterator.hasNext()) {
+            ValueCountEntry temp= simpleFacetFieldEntryIterator.next();
+            wikiFacets.add(new WikiFacet(temp.getValue(), temp.getValueCount()));
+        }
+        return wikiFacets;
     }
 }

@@ -1,6 +1,7 @@
 package com.otpp.wikisearch.domain.config;
 
 import com.otpp.wikisearch.domain.mappers.WikiArticleMapper;
+import com.otpp.wikisearch.domain.mappers.WikiFacetMapper;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.context.annotation.Bean;
@@ -14,5 +15,8 @@ public class DomainConfig {
     public WikiArticleMapper wikiArticleMapper() {
         return new WikiArticleMapper(defaultMapperFactory);
     }
-
+    @Bean
+    public WikiFacetMapper wikiFacetMapper() {
+        return new WikiFacetMapper(defaultMapperFactory);
+    }
 }

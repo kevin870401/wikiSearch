@@ -2,6 +2,7 @@ package com.otpp.wikiSearch.data.repository;
 
 import com.otpp.wikiSearch.data.configuration.SolrContext;
 import com.otpp.wikiSearch.data.entity.WikiArticle;
+import com.otpp.wikiSearch.data.entity.WikiFacet;
 import com.otpp.wikiSearch.data.utils.QueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,8 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -65,20 +68,20 @@ public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
         FacetPage<WikiArticle> wikiArticles =
                 wikiRepository.findByTitleStartsWith(QueryUtil.splitSearchTermAndRemoveIgnoredCharacters("A"),
                         FIRST_TEN);
-        assertThat(wikiRepository.getTopContributorUserName(wikiArticles)).isEqualTo("Jim Carter");
-        assertThat(wikiRepository.getTopContributorArticleAmount(wikiArticles)).isEqualTo(47);
+        assertThat(WikiRepositoryCustom.getTopContributorUserName(wikiArticles)).isEqualTo("Jim Carter");
+        assertThat(WikiRepositoryCustom.getTopContributorArticleAmount(wikiArticles)).isEqualTo(47);
     }
 
     @Test
     public void getTopContributorUserName_JimCarter() {
         FacetPage<WikiArticle> wikiArticles = wikiRepository.getUsersFacetSortedByArticleCount(FIRST_TEN);
-        assertThat(wikiRepository.getTopContributorUserName(wikiArticles)).isEqualTo("Jim Carter");
+        assertThat(WikiRepositoryCustom.getTopContributorUserName(wikiArticles)).isEqualTo("Jim Carter");
     }
 
     @Test
     public void getTopContributorArticleNumber_164() {
         FacetPage<WikiArticle> wikiArticles = wikiRepository.getUsersFacetSortedByArticleCount(FIRST_TEN);
-        assertThat(wikiRepository.getTopContributorArticleAmount(wikiArticles)).isEqualTo(164);
+        assertThat(WikiRepositoryCustom.getTopContributorArticleAmount(wikiArticles)).isEqualTo(164);
     }
 
     @Test
@@ -116,4 +119,11 @@ public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
         assertThat(result.getNumberOfElements()).isEqualTo(1);
         assertThat(result.getSize()).isEqualTo(10);
     }
+    @Test
+    public void getTopContributors__(){
+        List<WikiFacet> wikiFacets= WikiRepositoryCustom.getTopContributors(
+                wikiRepository.getUsersFacetSortedByArticleCount(FIRST_TEN));
+        assertThat(wikiFacets.size()).isEqualTo(0);
+    }
+
 }

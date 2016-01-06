@@ -1,7 +1,6 @@
 package com.otpp.wikiSearch.data.configuration;
 
 import com.otpp.wikiSearch.data.repository.WikiRepositoryCustom;
-import com.otpp.wikiSearch.data.repository.WikiRepositoryImpl;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,10 +26,5 @@ public class SolrContext {
     @Bean
     public SolrServer solrServer() {
         return new HttpSolrServer(solrHostUrl);
-    }
-
-    @Bean
-    public WikiRepositoryCustom customWikiRepository() {
-        return new WikiRepositoryImpl();
     }
 }
