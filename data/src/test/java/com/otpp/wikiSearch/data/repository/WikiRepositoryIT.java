@@ -120,10 +120,10 @@ public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
         assertThat(result.getSize()).isEqualTo(10);
     }
     @Test
-    public void getTopContributors__(){
+    public void getTopContributors_10AuthorsFound(){
         List<WikiFacet> wikiFacets= WikiRepositoryCustom.getTopContributors(
                 wikiRepository.getUsersFacetSortedByArticleCount(FIRST_TEN));
-        assertThat(wikiFacets.size()).isEqualTo(0);
+        assertThat(wikiFacets.size()).isEqualTo(10);
     }
 
 }
