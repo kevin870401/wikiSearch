@@ -18,7 +18,7 @@ public class WikiRepositoryImpl implements WikiRepositoryCustom {
     }
 
     @Override
-    public long getTopContributorArticleNumber(FacetPage facetPage) {
+    public long getTopContributorArticleAmount(FacetPage facetPage) {
         return ((SimpleFacetFieldEntry) ((SolrResultPage) facetPage.getFacetResultPages()
                                                                    .iterator()
                                                                    .next()).getContent()

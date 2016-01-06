@@ -66,7 +66,7 @@ public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
                 wikiRepository.findByTitleStartsWith(QueryUtil.splitSearchTermAndRemoveIgnoredCharacters("A"),
                         FIRST_TEN);
         assertThat(wikiRepository.getTopContributorUserName(wikiArticles)).isEqualTo("Jim Carter");
-        assertThat(wikiRepository.getTopContributorArticleNumber(wikiArticles)).isEqualTo(47);
+        assertThat(wikiRepository.getTopContributorArticleAmount(wikiArticles)).isEqualTo(47);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class WikiRepositoryIT extends AbstractTestNGSpringContextTests {
     @Test
     public void getTopContributorArticleNumber_164() {
         FacetPage<WikiArticle> wikiArticles = wikiRepository.getUsersFacetSortedByArticleCount(FIRST_TEN);
-        assertThat(wikiRepository.getTopContributorArticleNumber(wikiArticles)).isEqualTo(164);
+        assertThat(wikiRepository.getTopContributorArticleAmount(wikiArticles)).isEqualTo(164);
     }
 
     @Test

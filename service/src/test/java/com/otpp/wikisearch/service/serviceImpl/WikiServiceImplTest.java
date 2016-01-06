@@ -16,8 +16,4 @@ public class WikiServiceImplTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private WikiService wikiService;
 
-    @Test
-    public void getWikiArticle_idExist_success() {
-        assertThat(wikiService.getWikiArticle("10")).isNotNull();
-    }
 }

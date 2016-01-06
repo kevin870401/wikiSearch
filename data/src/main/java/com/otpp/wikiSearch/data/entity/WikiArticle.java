@@ -28,11 +28,12 @@ public class WikiArticle {
     @Indexed("userId")
     int userId;
     private
+    @Indexed("timestamp")
+    Date time;
+    private
     @Indexed("text")
     String text;
-    private
-    @Indexed("time")
-    Date time;
+
 
     @Override
     public String toString() {
