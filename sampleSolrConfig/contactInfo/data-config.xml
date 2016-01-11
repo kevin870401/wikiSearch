@@ -1,0 +1,45 @@
+<dataConfig>
+    <!--<dataSource type="FileDataSource" name="file" encoding="UTF-8"/>-->
+    <dataSource type="JdbcDataSource" name="as400" driver="com.ibm.as400.access.AS400JDBCDriver"
+                url="jdbc:as400:TCHR400C;libraries=OTPPRFIL"
+                user="eisvdev" password="A1eminfo"/>
+    <document>
+        <!-- <entity name="page"
+                 processor="XPathEntityProcessor"
+                 stream="true"
+                 forEach="/mediawiki/page/"
+                 url="C:\kevin\solr-5.4.0\server\solr\wiki\input\enwiki-latest-pages-articles1.xml"
+                 transformer="RegexTransformer,DateFormatTransformer"
+                 dataSource="file"
+                 >
+             <field column="id" xpath="/mediawiki/page/id"/>
+             <field column="title" xpath="/mediawiki/page/title"/>
+             <field column="revision" xpath="/mediawiki/page/revision/id"/>
+             <field column="user" xpath="/mediawiki/page/revision/contributor/username"/>
+             <field column="userId" xpath="/mediawiki/page/revision/contributor/id"/>
+             <field column="text" xpath="/mediawiki/page/revision/text"/>
+             <field column="timestamp" xpath="/mediawiki/page/revision/timestamp"
+                    dateTimeFormat="yyy-MM-dd'T'hh:mm:ss'Z'"/>
+             <field column="$skipDoc" regrex="^#REDIRECT .*" replaceWith="true" sourceColName="text"/>
+         </entity>-->
+
+        <entity name="contact" dataSource="as400" 
+		query="select contact.ID, contact.TITLE, contact.EMPLOYER_IRN,contact.SALUTATION, contact.FIRSTNAME,contact.LASTNAME,contact.LANGUAGE, contact.REPORTS_TO,
+		(a.STREET_1 ||' , ' ||  a.CITY||' , ' ||a.PROVINCE ||' , ' || a.COUNTRY ||' , ' || a.POSTAL_CODE) AS ADDRESS   from EDP290 contact inner JOIN EDP330 a ON a.CONTACT_ID =contact.ID ">
+            <field column="ID" name="id"/>
+            <field column="EMPLOYER_IRN" name="irn"/>
+            <field column="SALUTATION" name="salutation"/>
+            <field column="FIRSTNAME" name="firstname"/>
+			<field column="LASTNAME" name="lastname"/>
+            <field column="LANGUAGE" name="language"/>
+			<field column="ADDRESS" name="address"/> 
+			<field column="TITLE" name="title"/> 
+			<entity name="phone" query="select PHONE_NUMBER from EDP320 p where p.CONTACT_ID = '${contact.ID}'">
+				<field column="PHONE_NUMBER" name="phone"/>
+            </entity>
+			<entity name="emails" query="select * from EDP310 where CONTACT_ID='${contact.ID}'">
+				<field column="EMAIL_ADDRESS" name="emailAddress"/>
+            </entity>
+        </entity>
+    </document>
+</dataConfig>
