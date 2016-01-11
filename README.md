@@ -156,3 +156,8 @@ http://localhost:8983/solr/wiki/dihupdate?command=full-import
 
 ### test query
 ![alt tag](https://raw.githubusercontent.com/kevin870401/wikiSearch/master/readmeResource/solrQueryUI.PNG)
+
+### replicate 
+
+execute replicate from slave (doesn't need large java heap) since it's just tranfering 35+ Gb of index files
+![alt tag](https://raw.githubusercontent.com/kevin870401/wikiSearch/master/readmeResource/solr_replicate.PNG)
